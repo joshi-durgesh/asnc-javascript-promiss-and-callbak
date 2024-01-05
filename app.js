@@ -1,21 +1,29 @@
 const button = document.querySelector("button");
 const output = document.querySelector("p");
 
+const setTimer = (duration) => {
+  const promise = new Promise((resolve, reject) => {
+    setTimeout(() => {
+      resolve("Done!");
+    }, duration);
+  });
+  return promise;
+};
+
 function trackUserHandler() {
   navigator.geolocation.getCurrentPosition(
     (posData) => {
-      setTimeout(() => {
-        console.log(posData);
-      }, 2000);
-      console.log(posData);
+      setTimer(2000).then((data) => {
+        console.log(data, posData);
+      });
     },
     (error) => {
       console.log(error);
     }
   );
-  setTimeout(() => {
+  setTimer(1000).then(() => {
     console.log("Timmer done!");
-  }, 0);
+  });
   console.log("getting position...");
 }
 
